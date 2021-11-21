@@ -46,6 +46,11 @@ function create(e) {
             $('#create-user-modal').modal('hide');
         },
         error: function (response) {
+            if(response.status === 500) {
+                alert('Something went wrong!!!');
+                return;
+            }
+
             $nameErr = response.responseJSON.errors.name;
             $emailErr = response.responseJSON.errors.email;
 
@@ -111,6 +116,11 @@ function update(e) {
             $('#edit-user-modal').modal('hide');
         },
         error: function (response) {
+            if(response.status === 500) {
+                alert('Something went wrong!!!');
+                return;
+            }
+
             $nameErr = response.responseJSON.errors.name;
             $emailErr = response.responseJSON.errors.email;
 
@@ -168,7 +178,10 @@ function destroy(e) {
             $('#delete-user-modal').modal('hide');
         },
         error: function (response) {
-            // error here
+            if(response.status === 500) {
+                alert('Something went wrong!!!');
+                return;
+            }
         }
     })
 }
