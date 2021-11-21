@@ -41,7 +41,7 @@ function create(e) {
             name: $('#create-name').val(),
             email: $('#create-email').val()
         },
-        success: function (data) {
+        success: function () {
             fetchUsers();
             $('#create-user-modal').modal('hide');
         },
