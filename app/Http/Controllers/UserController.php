@@ -15,9 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('index', [
-            'users' => User::paginate(10)
-        ]);
+        return view('index');
     }
 
     public function getUsers()
@@ -34,7 +32,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return void
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -48,6 +46,8 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make('secret'),
         ]);
+
+        return response()->json('A user was created', 200);
     }
 
     /**
@@ -55,7 +55,7 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return void
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
@@ -64,22 +64,26 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . $id,
         ]);
 
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
         ]);
+
+        return response()->json('A user was updated', 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return void
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
+
+        return response()->json('A user was deleted', 200);
     }
 }

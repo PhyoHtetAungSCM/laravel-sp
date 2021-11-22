@@ -41,7 +41,7 @@ function create(e) {
             name: $('#create-name').val(),
             email: $('#create-email').val()
         },
-        success: function () {
+        success: function (response) {
             fetchUsers();
             $('#create-user-modal').modal('hide');
         },
@@ -56,12 +56,12 @@ function create(e) {
 
             if ($nameErr) {
                 $('#create-name').addClass('is-invalid');
-                $('#create-name-err').html($nameErr[0]);
+                $('#create-name-err').text($nameErr);
             }
 
             if ($emailErr) {
                 $('#create-email').addClass('is-invalid');
-                $('#create-email-err').html($emailErr[0]);
+                $('#create-email-err').text($emailErr);
             }
         }
     });
@@ -111,7 +111,7 @@ function update(e) {
             name: $('#edit-name').val(),
             email: $('#edit-email').val()
         },
-        success: function () {
+        success: function (response) {
             fetchUsers();
             $('#edit-user-modal').modal('hide');
         },
@@ -126,12 +126,12 @@ function update(e) {
 
             if ($nameErr) {
                 $('#edit-name').addClass('is-invalid');
-                $('#edit-name-err').html($nameErr[0]);
+                $('#edit-name-err').text($nameErr);
             }
 
             if ($emailErr) {
                 $('#edit-email').addClass('is-invalid');
-                $('#edit-email-err').html($emailErr[0]);
+                $('#edit-email-err').text($emailErr);
             }
         }
     })
@@ -173,7 +173,7 @@ function destroy(e) {
         headers: {
             'X-CSRF-Token': $('meta[name="_token"]').attr('content')
         },
-        success: function () {
+        success: function (response) {
             fetchUsers();
             $('#delete-user-modal').modal('hide');
         },
